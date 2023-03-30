@@ -1367,20 +1367,8 @@ CoreInternalAllocatePages (
           mMemoryTypeStatistics[CheckType].Special &&
           (mMemoryTypeStatistics[CheckType].NumberOfPages > 0))
       {
-        if ((Start >= mMemoryTypeStatistics[CheckType].BaseAddress) &&
-            (Start <= mMemoryTypeStatistics[CheckType].MaximumAddress))
-        {
-          return EFI_NOT_FOUND;
-        }
-
-        if ((End >= mMemoryTypeStatistics[CheckType].BaseAddress) &&
-            (End <= mMemoryTypeStatistics[CheckType].MaximumAddress))
-        {
-          return EFI_NOT_FOUND;
-        }
-
-        if ((Start < mMemoryTypeStatistics[CheckType].BaseAddress) &&
-            (End   > mMemoryTypeStatistics[CheckType].MaximumAddress))
+        if (!((Start >= mMemoryTypeStatistics[CheckType].MaximumAddress) ||
+              (End >= mMemoryTypeStatistics[CheckType].BaseAddress)))
         {
           return EFI_NOT_FOUND;
         }
